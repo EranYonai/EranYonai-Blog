@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="mb-12 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+        <div class="flex flex-col sm:flex-row items-center">
+            <!-- Profile picture loaded from static/assets folder -->
+            <div class="flex-shrink-0 mb-6 sm:mb-0 sm:mr-8">
+                <img class="h-32 w-32 rounded-full object-cover shadow-lg" src="{{ url_for('static', filename='assets/eran_profile.jpg') }}" alt="Eran Yonai Profile Picture">
+            </div>
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Hi 👋 I'm Eran Yonai</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mt-1">Senior Software Engineer @ Palo Alto Networks</p>
+                <p class="mt-4 text-gray-800 dark:text-gray-300">
+                    Welcome to my personal blog for all things technical and code-related. As a Senior Software Engineer at Palo Alto Networks, I contribute to the Cortex XDR platform, focusing on anti-malware and Endpoint Detection and Response (EDR). My work includes designing and integrating automated testing platforms to enhance CI/CD pipelines and bolster development efficiency.
+                </p>
+                <div class="mt-6 flex items-center space-x-6 text-gray-600 dark:text-gray-400">
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></path></svg>
+                        <span>Israel</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                        <a href="mailto:eranyonai@gmail.com" class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Contact me via email</a>
+                    </div>
+                </div>
+                 <a href="https://www.linkedin.com/in/eran-yonai-189562198/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                    View LinkedIn Profile
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-3xl font-bold mb-8 border-b border-gray-200 dark:border-gray-700 pb-4 text-gray-900 dark:text-gray-100">Latest Posts</h2>
+
+    <div class="space-y-8">
+        {% for post in posts %}
+            <article class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-gray-100">
+                    <a href="{{ url_for('post', post_id=post.id) }}" class="hover:underline text-gray-900 dark:text-gray-100">{{ post.title }}</a>
+                </h2>
+                <div class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                    By {{ post.author }} on {{ post.date_posted }}
+                </div>
+                <p class="text-gray-800 dark:text-gray-300">{{ post.content[:150] }}...</p>
+                <a href="{{ url_for('post', post_id=post.id) }}" class="text-blue-500 dark:text-blue-400 hover:underline mt-4 inline-block">Read More &rarr;</a>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

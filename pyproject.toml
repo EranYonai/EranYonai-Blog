@@ -1,0 +1,21 @@
+[project]
+name = "eranyonai-blog"
+version = "0.1.0"
+description = "A sleek, modern personal blog built with Flask."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "flask",
+    "markdown>=3.8.2",
+    "python-dateutil>=2.9.0.post0",
+    "python-frontmatter>=1.1.0",
+]
+
+[project.scripts]
+run-blog = "src/app:app"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+]
