@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Posts tagged with "{{ tag }}"</h1>
+    <a href="{{ url_for('home') }}" 
+       class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-6">
+        ← Back to all posts
+    </a>
+</div>
+
+{% if posts %}
+    <div class="space-y-8">
+        {% for post in posts %}
+            <article class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-gray-100">
+                    <a href="{{ url_for('post', post_id=post.id) }}" class="hover:underline text-gray-900 dark:text-gray-100">{{ post.title }}</a>
+                </h2>
+                <div class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                    By {{ post.author }} on {{ post.date_posted }}
+                    {% if post.tags %}
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        {% for post_tag in post.tags %}
+                        <a href="{{ url_for('posts_by_tag', tag=post_tag) }}" 
+                           class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors">
+                            #{{ post_tag }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <p class="text-gray-800 dark:text-gray-300">{{ post.excerpt }}</p>
+                <a href="{{ url_for('post', post_id=post.id) }}" class="text-blue-500 dark:text-blue-400 hover:underline mt-4 inline-block">Read More &rarr;</a>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 text-center">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">No posts found</h2>
+        <p class="text-gray-600 dark:text-gray-400">There are no posts tagged with "{{ tag }}" yet.</p>
+    </div>
+{% endif %}
+{% endblock %}
