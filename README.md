@@ -81,7 +81,7 @@ Write your post content in Markdown here...
 
 - **title**: The post title (required)
 - **author**: Post author name
-- **date**: Publication date in YYYY-MM-DD format
+- **date**: Publication date in DD-MM-YYYY format
 - **tags**: Array of tags for categorization
 - **excerpt**: Brief post description (optional - auto-generated if not provided)
 

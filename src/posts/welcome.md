@@ -1,7 +1,7 @@
 ---
 title: "Welcome to The Silent Contributor Blog"
 author: "Eran Yonai"
-date: "2024-01-15"
+date: "22-08-2025"
 tags: ["introduction", "blog"]
 excerpt: "Welcome to my personal blog where I share insights about software engineering, cybersecurity, and technical topics."
 ---
