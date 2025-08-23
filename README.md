@@ -38,6 +38,17 @@ Navigate to root project, and run:
 uv sync && uv run src/app.py
 ```
 
+### Available Command-Line Arguments
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--launch-browser` | flag | False | Automatically open the browser when starting the server |
+| `--host` | string | 127.0.0.1 | Host to run the server on |
+| `--port` | integer | 5000 | Port to run the server on |
+| `--debug` | flag | True | Run in debug mode |
+| `--hot-reload` | flag | True | Enable hot reload (auto-restart on file changes) |
+| `--help` | flag | False | Show help message and exit |
+
 ## Project Structure
 
 ```
