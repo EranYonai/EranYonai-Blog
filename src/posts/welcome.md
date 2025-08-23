@@ -5,8 +5,11 @@ date: "22-08-2025"
 tags: ["introduction", "blog"]
 excerpt: "Welcome to my personal blog where I share insights about software engineering, cybersecurity, and technical topics."
 ---
-
 # Welcome to The Silent Contributor Blog
+
+<div class="flex justify-center my-6">
+    <img src="/static/assets/welcome_post_intro.jpeg" alt="Welcome to The Silent Contributor Blog" class="max-w-md w-full rounded-lg shadow-md">
+</div>
 
 Hello and welcome to my personal blog! I'm excited to share my journey as a Senior Software Engineer at Palo Alto Networks.
 

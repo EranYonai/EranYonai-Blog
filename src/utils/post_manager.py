@@ -61,6 +61,11 @@ class Post:
         # Generate excerpt from content (first 150 chars)
         return self.content[:150] + "..." if len(self.content) > 150 else self.content
 
+    @property
+    def featured_image(self) -> str:
+        """Return the featured image URL from metadata"""
+        return self.metadata.get("featured_image", "")
+
 
 class PostsManager:
     def __init__(self, posts_directory: str = "src/posts"):
