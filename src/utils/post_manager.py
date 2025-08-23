@@ -1,8 +1,9 @@
 import os
-import frontmatter
 from datetime import datetime
-from typing import List, Dict, Optional
 from pathlib import Path
+from typing import List, Optional
+
+import frontmatter
 import markdown
 from dateutil import parser as date_parser
 

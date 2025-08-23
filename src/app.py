@@ -2,7 +2,6 @@ from flask import Flask, abort, render_template
 
 from utils.post_manager import PostsManager
 
-
 app = Flask(__name__)
 posts_manager = PostsManager()
 
