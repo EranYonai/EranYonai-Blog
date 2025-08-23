@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "Apache-2.0" }
 dependencies = [
+    "argparse>=1.4.0",
     "flask",
     "markdown>=3.8.2",
     "python-dateutil>=2.9.0.post0",

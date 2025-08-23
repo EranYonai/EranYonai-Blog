@@ -1,3 +1,7 @@
+import argparse
+import threading
+import time
+import webbrowser
 from flask import Flask, abort, render_template
 
 from utils.post_manager import PostsManager
@@ -29,5 +33,30 @@ def post(post_id):
     return render_template('post.html', post=post)
 
 
+# move this to utils.py ->
+def open_browser(url):
+    """Opens the browser after a short delay to ensure the server is running."""
+    time.sleep(1)  # Wait for the server to start
+    webbrowser.open(url)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # simple argparse to launch server.
+    parser = argparse.ArgumentParser(description='Run the EranYonai-Blog Flask application')
+    parser.add_argument('--launch-browser', action='store_true', default=False,
+                       help='Automatically open the browser when starting the server')
+    parser.add_argument('--host', default='127.0.0.1', 
+                       help='Host to run the server on (default: 127.0.0.1)')
+    parser.add_argument('--port', type=int, default=5000, 
+                       help='Port to run the server on (default: 5000)')
+    parser.add_argument('--debug', action='store_true', default=True,
+                       help='Run in debug mode (default: True)')
+    parser.add_argument('--hot-reload', action='store_true', default=True,
+                       help='Enable hot reload (auto-restart on file changes) (default: True)')
+    
+    args = parser.parse_args()
+    
+    if args.launch_browser:
+        url = f"http://{args.host}:{args.port}"
+        threading.Thread(target=open_browser, args=(url,), daemon=True).start()
+    
+    app.run(host=args.host, port=args.port, debug=args.debug)
