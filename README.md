@@ -1,6 +1,6 @@
-# Eranyonai's Flask Blog
+# Eran Yonai's Blog
 
-This is a sleek, modern personal blog built with the Flask web framework. It features a clean user interface with both light and dark themes, markdown post support, and a robust post management system.
+This is a sleek, modern personal blog built with Flask framework. It features an intelligent markdown-to-website conversion system that automatically transforms markdown files into beautiful web pages, complete with frontmatter parsing, tag organization, and dynamic post management.
 
 ## Features
 
