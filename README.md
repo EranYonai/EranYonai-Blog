@@ -1,6 +1,12 @@
-# Eranyonai's Flask Blog
+# Eran Yonai's Blog
 
 This is a sleek, modern personal blog built with the Flask web framework. It features a clean user interface with both light and dark themes, markdown post support, and a robust post management system.
+
+## 🚀 Live
+
+The blog is deployed and accessible at: **[https://eranyonaiblog.onrender.com/](https://eranyonaiblog.onrender.com/)**
+
+> **⚠️ Disclaimer:** This site is hosted on Render's free tier. Free instances spin down with inactivity, which can delay requests by 50+ seconds on first load. Additionally, the behavior and availability may change over time as the hosting environment evolves.
 
 ## Features
 
@@ -78,7 +84,7 @@ Create new blog posts as Markdown files in the `src/posts/` directory. Each post
 ---
 title: "Your Post Title"
 author: "Your Name"
-date: "2024-01-15"
+date: "15-01-2025"
 tags: ["tag1", "tag2"]
 excerpt: "Brief description of your post"
 ---

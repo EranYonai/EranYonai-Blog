@@ -1,11 +1,14 @@
 import os
-import frontmatter
 from datetime import datetime
-from typing import List, Dict, Optional
+from pathlib import Path
+from typing import List, Optional
+
+import frontmatter
 import markdown
 from dateutil import parser as date_parser
 
 # TODO: exception handling.
+BASE_DIR = Path(__file__).parent.parent
 
 class Post:
     def __init__(self, filename: str, metadata: dict, content: str):
@@ -68,21 +71,28 @@ class Post:
 
 
 class PostsManager:
-    def __init__(self, posts_directory: str = "src/posts"):
-        self.posts_directory = posts_directory
+    def __init__(self, posts_directory: str = None):
+        if posts_directory is None:
+            # Default to posts directory relative to this file's parent directory
+            self.posts_directory = BASE_DIR / "posts"
+        else:
+            self.posts_directory = Path(posts_directory)
+        
         self._posts_cache = None
         self._last_modified = None
 
     def _needs_refresh(self) -> bool:
         """Check if posts directory has been modified since last cache"""
-        if not os.path.exists(self.posts_directory):
+        if not self.posts_directory.exists():
             return False
 
         try:
+            md_files = list(self.posts_directory.glob("*.md"))
+            if not md_files:
+                return True
+                
             current_modified = max(
-                os.path.getmtime(os.path.join(self.posts_directory, f))
-                for f in os.listdir(self.posts_directory)
-                if f.endswith(".md")
+                file.stat().st_mtime for file in md_files
             )
             return self._last_modified != current_modified
         except (ValueError, OSError):
@@ -92,24 +102,20 @@ class PostsManager:
         """Load all markdown posts from the posts directory"""
         posts = []
 
-        if not os.path.exists(self.posts_directory):
+        if not self.posts_directory.exists():
             print(f"Posts directory {self.posts_directory} does not exist")
             return posts
 
-        for filename in os.listdir(self.posts_directory):
-            if not filename.endswith(".md"):
-                continue
-
-            filepath = os.path.join(self.posts_directory, filename)
+        for filepath in self.posts_directory.glob("*.md"):
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
                     post_data = frontmatter.load(f)
 
-                post = Post(filename=filename, metadata=post_data.metadata, content=post_data.content)
+                post = Post(filename=filepath.name, metadata=post_data.metadata, content=post_data.content)
                 posts.append(post)
 
             except Exception as e:
-                print(f"Error loading post {filename}: {e}")
+                print(f"Error loading post {filepath.name}: {e}")
                 continue
 
         # Sort posts by date (newest first)
@@ -118,11 +124,13 @@ class PostsManager:
         # Update cache
         self._posts_cache = posts
         try:
-            self._last_modified = max(
-                os.path.getmtime(os.path.join(self.posts_directory, f))
-                for f in os.listdir(self.posts_directory)
-                if f.endswith(".md")
-            )
+            md_files = list(self.posts_directory.glob("*.md"))
+            if md_files:
+                self._last_modified = max(
+                    file.stat().st_mtime for file in md_files
+                )
+            else:
+                self._last_modified = datetime.now().timestamp()
         except (ValueError, OSError):
             self._last_modified = datetime.now().timestamp()
 
