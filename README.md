@@ -73,7 +73,7 @@ Create new blog posts as Markdown files in the `src/posts/` directory. Each post
 ---
 title: "Your Post Title"
 author: "Your Name"
-date: "2024-01-15"
+date: "15-01-2025"
 tags: ["tag1", "tag2"]
 excerpt: "Brief description of your post"
 ---
