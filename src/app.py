@@ -9,6 +9,10 @@ from utils.post_manager import PostsManager
 app = Flask(__name__)
 posts_manager = PostsManager()
 
+# Notion-style: Inject all posts into the global template context for the sidebar
+@app.context_processor
+def inject_posts():
+    return dict(all_posts=posts_manager.get_all_posts())
 
 @app.route("/")
 @app.route("/home")
